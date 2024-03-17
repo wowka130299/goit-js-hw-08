@@ -95,7 +95,7 @@ function handleProductClick(event) {
     return;
 }
     
-const currentProduct = event.target.closest(".gallery-image");
+const currentProduct = event.target;
 const imageLink = currentProduct.dataset.source;
 const currentAttrubute = currentProduct.getAttribute('alt');
 

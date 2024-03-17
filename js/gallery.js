@@ -77,7 +77,7 @@ function createMarkup(arr) {
   return arr
     .map((images) => `
       <li class="gallery-item">
-      <a class="gallery-link" href="${images.preview}" onclick="return false;">
+      <a class="gallery-link" href="${images.preview}" >
        <img
       class="gallery-image"
       src="${images.preview}"
@@ -90,6 +90,7 @@ function createMarkup(arr) {
 }
 
 function handleProductClick(event) {
+    event.preventDefault();
   if(event.target === event.currentTarget) {
     return;
 }

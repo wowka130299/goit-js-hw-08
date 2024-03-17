@@ -71,7 +71,7 @@ const container = document.querySelector(".gallery");
 
 container.insertAdjacentHTML("beforeend", createMarkup(images));
 container.addEventListener("click", handleProductClick);
-
+let instance = null;
 
 function createMarkup(arr) {
   return arr
@@ -82,7 +82,7 @@ function createMarkup(arr) {
       class="gallery-image"
       src="${images.preview}"
       data-source="${images.original}"
-      alt="${images.description}""
+      alt="${images.description}"
     />
   </a>
 </li>
@@ -95,29 +95,26 @@ function handleProductClick(event) {
     return;
 }
     
- 
-
 const currentProduct = event.target.closest(".gallery-image");
 const imageLink = currentProduct.dataset.source;
 const currentAttrubute = currentProduct.getAttribute('alt');
 
     
     
-const instance = basicLightbox.create(`
+instance = basicLightbox.create(`
     <div class="modal">
         <img src="${imageLink}" alt="${currentAttrubute}"
     </div>
   `);
 
 instance.show();
-document.addEventListener('keydown', function(event) {
-    
-if (event.key === 'Escape') {
-    instance.close()
-}
-});  
-    
-
+  document.addEventListener('keydown', closeModal);
 }
 
+function closeModal(event) {
+  if (event.key === 'Escape') {
+    instance.close();
+    document.removeEventListener('keydown', closeModal);
+  }
+}
  
